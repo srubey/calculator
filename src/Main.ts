@@ -19,6 +19,7 @@ window.onload = () => {
   document.getElementById('-').onclick = () => calcUI.op(Op.Sub);
   document.getElementById('*').onclick = () => calcUI.op(Op.Mul);
   document.getElementById('/').onclick = () => calcUI.op(Op.Div);
+  document.getElementById('^2').onclick = () => calcUI.op(Op.Sqr);
   document.getElementById('=').onclick = () => calcUI.equals();
   document.getElementById('C').onclick = () => calcUI.clear();
 }

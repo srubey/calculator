@@ -341,3 +341,13 @@ test('divide three different numbers', () => {
           expect(calc.lcd).toBe(((i / j) / k).toString());
       }
 });
+
+test('square a number', () => {
+  for (let i of numbers){
+    let calc = new Calculator();
+    calc.lcd = i.toString();
+    calc.op(Op.Sqr);
+    calc.equals();
+    expect(calc.lcd).toBe((i * i).toString());
+  }
+});

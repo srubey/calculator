@@ -351,3 +351,13 @@ test('square a number', () => {
     expect(calc.lcd).toBe((i * i).toString());
   }
 });
+
+test('percent value of a number', () => {
+  for (let i of numbers){
+    let calc = new Calculator();
+    calc.lcd = i.toString();
+    calc.op(Op.Pct);
+    calc.equals();
+    expect(calc.lcd).toBe((i / 100).toString());
+  }
+});

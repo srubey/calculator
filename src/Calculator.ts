@@ -25,7 +25,12 @@ export enum Op {
   /**
    * Square.
    */
-  Sqr
+  Sqr,
+
+  /**
+   * Percent.
+   */
+  Pct
 }
 
 /**
@@ -176,6 +181,11 @@ export class Calculator {
           this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();
         else
           this.lcd =  (this.arg * this.arg).toString(); break;
+      case Op.Pct:
+        if (this.repeat)
+          this.lcd = (parseFloat(this.lcd) / 100).toString();
+        else
+          this.lcd = (this.arg / 100).toString(); break;
     }
 
     // If `repeat` is disabled, we need to save the previous value of the screen

@@ -114,20 +114,17 @@ export class Calculator {
    * Square the current value on the screen.
    */
   square() {
-    /*if (this.overwrite) {
-      this.lcd = '0';
-      this.overwrite = false;
-    } else if (this.lcd === 'Infinity')
-      this.lcd = 'Infinity';
-    else if (this.lcd !== '0')
-      this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();  */
-
-      /*if (this.lcd === 'Infinity')
-        this.lcd = 'Infinity';
-      else if (this.lcd === "NaN")
-        this.lcd = 'NaN';  */
-      if (this.lcd !== 'Infinity' && this.lcd !== '-Infinity' && this.lcd !== 'NaN')
+      if (this.lcd !== 'Infinity' && this.lcd !== '-Infinity' && this.lcd !== 'NaN')  //error messages should persist
         this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();
+  }
+
+  /**
+   * Yield the percentage value of the value on the screen
+   * An lcd value of 1 should yield .01
+   */
+  percent() {
+    if (this.lcd !== 'Infinity' && this.lcd !== '-Infinity' && this.lcd !== 'NaN')
+      this.lcd = (parseFloat(this.lcd) / 100).toString();
   }
 
   /**

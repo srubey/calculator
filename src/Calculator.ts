@@ -21,16 +21,6 @@ export enum Op {
    * Division.
    */
   Div,
-
-  /**
-   * Square.
-   */
-  Sqr,
-
-  /**
-   * Percent.
-   */
-  Pct
 }
 
 /**
@@ -121,6 +111,17 @@ export class Calculator {
   }
 
   /**
+   * Square the current value on the screen.
+   */
+  square() {
+    if (this.overwrite) {
+      this.lcd = '0';
+      this.overwrite = false;
+    } else if (this.lcd !== '0')
+      this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();
+  }
+
+  /**
    * Input a binary operator. If there is a pending operation whose result has
    * not yet been displayed, update the screen to display that result. For
    * example, when a user inputs 2 + 4 + 8, the screen is updated to display 6
@@ -176,16 +177,6 @@ export class Calculator {
         else
           this.lcd = (this.arg / parseFloat(this.lcd)).toString();
         break;
-      case Op.Sqr:
-        if (this.repeat)
-          this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();
-        else
-          this.lcd =  (this.arg * this.arg).toString(); break;
-      case Op.Pct:
-        if (this.repeat)
-          this.lcd = (parseFloat(this.lcd) / 100).toString();
-        else
-          this.lcd = (this.arg / 100).toString(); break;
     }
 
     // If `repeat` is disabled, we need to save the previous value of the screen

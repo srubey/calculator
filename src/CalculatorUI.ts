@@ -32,6 +32,11 @@ export class CalculatorUI extends Calculator {
     this.lcdDisplay.innerHTML = this.lcd.toString();
   }
 
+  square() {
+    super.square();
+    this.lcdDisplay.innerHTML = this.lcd.toString();
+  }
+
   op(o: Op) {
     super.op(o);
     this.lcdDisplay.innerHTML = this.lcd.toString();

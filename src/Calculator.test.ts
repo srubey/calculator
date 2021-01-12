@@ -342,7 +342,7 @@ test('divide three different numbers', () => {
       }
 });
 
-test('square a number', () => {
+/*test('square a number', () => {
   for (let i of numbers){
     let calc = new Calculator();
     calc.lcd = i.toString();
@@ -350,9 +350,9 @@ test('square a number', () => {
     calc.equals();
     expect(calc.lcd).toBe((i * i).toString());
   }
-});
+});  */
 
-test('percent value of a number', () => {
+/*test('percent value of a number', () => {
   for (let i of numbers){
     let calc = new Calculator();
     calc.lcd = i.toString();
@@ -360,4 +360,4 @@ test('percent value of a number', () => {
     calc.equals();
     expect(calc.lcd).toBe((i / 100).toString());
   }
-});
+});  */

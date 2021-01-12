@@ -119,7 +119,7 @@ export class Calculator {
   }
 
   /**
-   * Yield the percentage value of the value on the screen
+   * Yield the percentage-value of the value on the screen
    * An lcd value of 1 should yield .01
    */
   percent() {

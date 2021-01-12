@@ -20,7 +20,7 @@ export enum Op {
   /**
    * Division.
    */
-  Div,
+  Div
 }
 
 /**
@@ -114,11 +114,20 @@ export class Calculator {
    * Square the current value on the screen.
    */
   square() {
-    if (this.overwrite) {
+    /*if (this.overwrite) {
       this.lcd = '0';
       this.overwrite = false;
-    } else if (this.lcd !== '0')
-      this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();
+    } else if (this.lcd === 'Infinity')
+      this.lcd = 'Infinity';
+    else if (this.lcd !== '0')
+      this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();  */
+
+      /*if (this.lcd === 'Infinity')
+        this.lcd = 'Infinity';
+      else if (this.lcd === "NaN")
+        this.lcd = 'NaN';  */
+      if (this.lcd !== 'Infinity' && this.lcd !== '-Infinity' && this.lcd !== 'NaN')
+        this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();
   }
 
   /**

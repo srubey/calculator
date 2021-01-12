@@ -342,15 +342,35 @@ test('divide three different numbers', () => {
       }
 });
 
-/*test('square a number', () => {
+test('square a number', () => {
   for (let i of numbers){
     let calc = new Calculator();
     calc.lcd = i.toString();
-    calc.op(Op.Sqr);
-    calc.equals();
+    calc.square();
     expect(calc.lcd).toBe((i * i).toString());
   }
-});  */
+});  
+
+test('Infinity message persists in square function', () => {
+  let calc = new Calculator();
+  calc.lcd = 'Infinity';
+  calc.square();
+  expect(calc.lcd).toBe('Infinity');
+});
+
+test('-Infinity message persists in square function', () => {
+  let calc = new Calculator();
+  calc.lcd = '-Infinity';
+  calc.square();
+  expect(calc.lcd).toBe('-Infinity');
+});
+
+test('NaN message persists in square function', () => {
+  let calc = new Calculator();
+  calc.lcd = 'NaN';
+  calc.square();
+  expect(calc.lcd).toBe('NaN');
+});
 
 /*test('percent value of a number', () => {
   for (let i of numbers){

@@ -372,12 +372,32 @@ test('NaN message persists in square function', () => {
   expect(calc.lcd).toBe('NaN');
 });
 
-/*test('percent value of a number', () => {
+test('get percent value of a number', () => {
   for (let i of numbers){
     let calc = new Calculator();
     calc.lcd = i.toString();
-    calc.op(Op.Pct);
-    calc.equals();
+    calc.percent();
     expect(calc.lcd).toBe((i / 100).toString());
   }
-});  */
+});  
+
+test('Infinity message persists in percent function', () => {
+  let calc = new Calculator();
+  calc.lcd = 'Infinity';
+  calc.percent();
+  expect(calc.lcd).toBe('Infinity');
+});
+
+test('-Infinity message persists in percent function', () => {
+  let calc = new Calculator();
+  calc.lcd = '-Infinity';
+  calc.percent();
+  expect(calc.lcd).toBe('-Infinity');
+});
+
+test('NaN message persists in percent function', () => {
+  let calc = new Calculator();
+  calc.lcd = 'NaN';
+  calc.percent();
+  expect(calc.lcd).toBe('NaN');
+});

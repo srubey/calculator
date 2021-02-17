@@ -10,17 +10,17 @@ export enum Op {
   /**
    * Subtraction.
    */
-  Sub,
+  Subtract,
 
   /**
    * Multiplication.
    */
-  Mul,
+  Multiply,
 
   /**
    * Division.
    */
-  Div
+  Divide
 }
 
 /**
@@ -31,7 +31,7 @@ export class Calculator {
   /**
    * The contents of the calculator's LCD display.
    */
-  lcd: string;
+  display: string;
 
   /**
    * The result of the last operation if `repeat` is `false`, or the second
@@ -42,7 +42,7 @@ export class Calculator {
   /**
    * The last operation that the user entered.
    */
-  lastOp: Op;
+  prevOperation: Op;
 
   /**
    * If `true`, the calculator is in "overwrite mode"; if `false`, the
@@ -59,18 +59,18 @@ export class Calculator {
    * the previous operation was 3 + 5 and the calculator is in repeat mode,
    * pressing = will update the screen with the number 13.
    */
-  repeat: boolean;
+  repeatOperation: boolean;
 
   /**
    * In its initial state, the calculator's screen shows `0`, there is no
    * previous result or operation, and overwrite mode is enabled.
    */
   constructor() {
-    this.lcd = '0';
+    this.display = '0';
     this.arg = null;
-    this.lastOp = null;
+    this.prevOperation = null;
     this.overwrite = true;
-    this.repeat = false;
+    this.repeatOperation = false;
   }
 
   /**
@@ -79,10 +79,10 @@ export class Calculator {
    */
   digit(x: number) {
     if (this.overwrite) {
-      this.lcd = x.toString();
+      this.display = x.toString();
       this.overwrite = false;
     } else
-      this.lcd += x;
+      this.display += x;
   }
 
   /**
@@ -90,10 +90,10 @@ export class Calculator {
    */
   decimal() {
     if (this.overwrite) {
-      this.lcd = '0.';
+      this.display = '0.';
       this.overwrite = false;
-    } else if (this.lcd.indexOf('.') === -1) // don't allow more than one '.'
-      this.lcd += '.';
+    } else if (this.display.indexOf('.') === -1) // don't allow more than one '.'
+      this.display += '.';
   }
 
   /**
@@ -101,21 +101,21 @@ export class Calculator {
    */
   negate() {
     if (this.overwrite) {
-      this.lcd = '0';
+      this.display = '0';
       this.overwrite = false;
-    } else if (this.lcd !== '0') // don't negate '0'
-      if (this.lcd.charAt(0) === '-')
-        this.lcd = this.lcd.substring(1)
+    } else if (this.display !== '0') // don't negate '0'
+      if (this.display.charAt(0) === '-')
+        this.display = this.display.substring(1)
       else
-        this.lcd = '-' + this.lcd
+        this.display = '-' + this.display
   }
 
   /**
    * Square the current value on the screen.
    */
   square() {
-      if (this.lcd !== 'Infinity' && this.lcd !== '-Infinity' && this.lcd !== 'NaN')  //error messages should persist
-        this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();
+      if (this.display !== 'Infinity' && this.display !== '-Infinity' && this.display !== 'NaN')  //error messages should persist
+        this.display = (parseFloat(this.display) * parseFloat(this.display)).toString();
   }
 
   /**
@@ -123,8 +123,8 @@ export class Calculator {
    * An lcd value of 1 should yield .01
    */
   percent() {
-    if (this.lcd !== 'Infinity' && this.lcd !== '-Infinity' && this.lcd !== 'NaN')
-      this.lcd = (parseFloat(this.lcd) / 100).toString();
+    if (this.display !== 'Infinity' && this.display !== '-Infinity' && this.display !== 'NaN')
+      this.display = (parseFloat(this.display) / 100).toString();
   }
 
   /**
@@ -135,20 +135,20 @@ export class Calculator {
    */
   op(o: Op) {
     this.overwrite = true;
-    if (this.arg === null || this.repeat) { // if this is the first argument
-      this.lastOp = o;
-      this.arg = parseFloat(this.lcd);
+    if (this.arg === null || this.repeatOperation) { // if this is the first argument
+      this.prevOperation = o;
+      this.arg = parseFloat(this.display);
     } else { // if this is the second argument
-      switch (this.lastOp) {
-        case Op.Add: this.lcd = (this.arg + parseFloat(this.lcd)).toString(); break;
-        case Op.Sub: this.lcd = (this.arg - parseFloat(this.lcd)).toString(); break;
-        case Op.Mul: this.lcd = (this.arg * parseFloat(this.lcd)).toString(); break;
-        case Op.Div: this.lcd = (this.arg / parseFloat(this.lcd)).toString(); break;
+      switch (this.prevOperation) {
+        case Op.Add: this.display = (this.arg + parseFloat(this.display)).toString(); break;
+        case Op.Subtract: this.display = (this.arg - parseFloat(this.display)).toString(); break;
+        case Op.Multiply: this.display = (this.arg * parseFloat(this.display)).toString(); break;
+        case Op.Divide: this.display = (this.arg / parseFloat(this.display)).toString(); break;
       }
-      this.lastOp = o;
-      this.arg = parseFloat(this.lcd);
+      this.prevOperation = o;
+      this.arg = parseFloat(this.display);
     }
-    this.repeat = false;
+    this.repeatOperation = false;
   }
 
   /**
@@ -162,35 +162,35 @@ export class Calculator {
     // If `repeat` is disabled, this press of = will enable it. In that case,
     // the value currently on screen is the second argument, the one that's used
     // when repeating the operation.
-    let oldLcd = parseFloat(this.lcd);
+    let oldLcd = parseFloat(this.display);
 
     // If `repeat` is disabled, then `this.arg` is the first argument to the
     // operation; if `repeat` is enabled, then it's the second argument.
     // This doesn't matter in the + and * cases because the result is the same
     // either way.
-    switch (this.lastOp) {
-      case Op.Add: this.lcd = (this.arg + parseFloat(this.lcd)).toString(); break;
-      case Op.Sub:
-        if (this.repeat)
-          this.lcd = (parseFloat(this.lcd) - this.arg).toString();
+    switch (this.prevOperation) {
+      case Op.Add: this.display = (this.arg + parseFloat(this.display)).toString(); break;
+      case Op.Subtract:
+        if (this.repeatOperation)
+          this.display = (parseFloat(this.display) - this.arg).toString();
         else
-          this.lcd = (this.arg - parseFloat(this.lcd)).toString();
+          this.display = (this.arg - parseFloat(this.display)).toString();
           break;
-      case Op.Mul: this.lcd = (this.arg * parseFloat(this.lcd)).toString(); break;
-      case Op.Div: 
-        if (this.repeat)
-          this.lcd = (parseFloat(this.lcd) / this.arg).toString();
+      case Op.Multiply: this.display = (this.arg * parseFloat(this.display)).toString(); break;
+      case Op.Divide: 
+        if (this.repeatOperation)
+          this.display = (parseFloat(this.display) / this.arg).toString();
         else
-          this.lcd = (this.arg / parseFloat(this.lcd)).toString();
+          this.display = (this.arg / parseFloat(this.display)).toString();
         break;
     }
 
     // If `repeat` is disabled, we need to save the previous value of the screen
     // to use it as the second argument when repeating the operation.
-    if (!this.repeat)
+    if (!this.repeatOperation)
       this.arg = oldLcd;
 
-    this.repeat = true;
+    this.repeatOperation = true;
     this.overwrite = true;
   }
 
@@ -201,10 +201,10 @@ export class Calculator {
   clear() {
     if (this.overwrite) {
       this.arg = null;
-      this.lastOp = null;
-      this.repeat = false;
+      this.prevOperation = null;
+      this.repeatOperation = false;
     }
-    this.lcd = '0';
+    this.display = '0';
     this.overwrite = true;
   }
 }

@@ -78,11 +78,16 @@ export class Calculator {
    * @param x a single digit, 0-9
    */
   digit(x: number) {
-    if (this.overwrite) {
-      this.display = x.toString();
-      this.overwrite = false;
-    } else
-      this.display += x;
+    let isDigit = this.checkIfSingleDigit(x);
+    if(!isDigit) {
+      if (this.overwrite) {
+        this.display = x.toString();
+        this.overwrite = false;
+      } else
+          this.display += x;
+    }
+    else
+      this.display = 'Error';
   }
 
   /**
@@ -222,5 +227,18 @@ export class Calculator {
     }
     this.display = '0';
     this.overwrite = true;
+  }
+
+  /**
+   * Verifies the user's input is a single numerical digit between 0 and 9
+   */
+  checkIfSingleDigit(x: number) {
+    let isDigit = false;
+
+    if(x !== 0 && x !== 1 && x !== 2 && x !== 3 && x !== 4 && 
+       x !== 5 && x !== 6 && x !== 7 && x !== 8 && x !== 9)
+       isDigit = true;
+
+    return isDigit;
   }
 }

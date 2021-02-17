@@ -115,7 +115,7 @@ export class Calculator {
    */
   square() {
       if (this.display !== 'Infinity' && this.display !== '-Infinity' && this.display !== 'NaN')  //error messages should persist
-        this.display = (parseFloat(this.display) * parseFloat(this.display)).toString();
+        this.display = Math.pow(parseFloat(this.display), 2).toString();
   }
 
   /**
@@ -123,7 +123,7 @@ export class Calculator {
    * An lcd value of 1 should yield .01
    */
   percent() {
-    if (this.display !== 'Infinity' && this.display !== '-Infinity' && this.display !== 'NaN')
+    if (this.display !== 'Infinity' && this.display !== '-Infinity' && this.display !== 'NaN')  //error messages should persist
       this.display = (parseFloat(this.display) / 100).toString();
   }
 
@@ -140,10 +140,18 @@ export class Calculator {
       this.arg = parseFloat(this.display);
     } else { // if this is the second argument
       switch (this.prevOperation) {
-        case Op.Add: this.display = (this.arg + parseFloat(this.display)).toString(); break;
-        case Op.Subtract: this.display = (this.arg - parseFloat(this.display)).toString(); break;
-        case Op.Multiply: this.display = (this.arg * parseFloat(this.display)).toString(); break;
-        case Op.Divide: this.display = (this.arg / parseFloat(this.display)).toString(); break;
+        case Op.Add: 
+          this.display = (this.arg + parseFloat(this.display)).toString(); 
+          break;
+        case Op.Subtract: 
+          this.display = (this.arg - parseFloat(this.display)).toString(); 
+          break;
+        case Op.Multiply: 
+          this.display = (this.arg * parseFloat(this.display)).toString(); 
+          break;
+        case Op.Divide: 
+          this.display = (this.arg / parseFloat(this.display)).toString(); 
+          break;
       }
       this.prevOperation = o;
       this.arg = parseFloat(this.display);
@@ -169,14 +177,18 @@ export class Calculator {
     // This doesn't matter in the + and * cases because the result is the same
     // either way.
     switch (this.prevOperation) {
-      case Op.Add: this.display = (this.arg + parseFloat(this.display)).toString(); break;
+      case Op.Add: 
+        this.display = (this.arg + parseFloat(this.display)).toString(); 
+        break;
       case Op.Subtract:
         if (this.repeatOperation)
           this.display = (parseFloat(this.display) - this.arg).toString();
         else
           this.display = (this.arg - parseFloat(this.display)).toString();
           break;
-      case Op.Multiply: this.display = (this.arg * parseFloat(this.display)).toString(); break;
+      case Op.Multiply: 
+        this.display = (this.arg * parseFloat(this.display)).toString(); 
+        break;
       case Op.Divide: 
         if (this.repeatOperation)
           this.display = (parseFloat(this.display) / this.arg).toString();

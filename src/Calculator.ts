@@ -115,7 +115,7 @@ export class Calculator {
    */
   square() {
       if (this.lcd !== 'Infinity' && this.lcd !== '-Infinity' && this.lcd !== 'NaN')  //error messages should persist
-        this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();
+        this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd) * 2).toString();
   }
 
   /**

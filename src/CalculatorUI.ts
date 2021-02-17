@@ -14,46 +14,49 @@ export class CalculatorUI extends Calculator {
   constructor(id: string) {
     super();
     this.lcdDisplay = document.getElementById(id);
-    this.lcdDisplay.innerHTML = this.lcd;
+    this.updateDisplay();
   }
 
   digit(x: number) {
     super.digit(x);
-    this.lcdDisplay.innerHTML = this.lcd.toString();
+    this.updateDisplay();
   }
 
   decimal() {
     super.decimal();
-    this.lcdDisplay.innerHTML = this.lcd.toString();
+    this.updateDisplay();
   }
 
   negate() {
     super.negate();
-    this.lcdDisplay.innerHTML = this.lcd.toString();
+    this.updateDisplay();
   }
 
-  square() {
+  square(){
     super.square();
-    this.lcdDisplay.innerHTML = this.lcd.toString();
+    this.updateDisplay();
   }
-
-  percent() {
+  percent(){
     super.percent();
-    this.lcdDisplay.innerHTML = this.lcd.toString();
+    this.updateDisplay();
   }
 
   op(o: Op) {
     super.op(o);
-    this.lcdDisplay.innerHTML = this.lcd.toString();
+    this.updateDisplay();
   }
 
   equals() {
     super.equals();
-    this.lcdDisplay.innerHTML = this.lcd.toString();
+    this.updateDisplay();
   }
 
   clear() {
     super.clear();
-    this.lcdDisplay.innerHTML = this.lcd.toString();
+    this.updateDisplay();
+  }
+
+  updateDisplay() {
+    this.lcdDisplay.innerHTML = this.display;
   }
 }

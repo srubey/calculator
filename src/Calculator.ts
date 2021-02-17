@@ -115,7 +115,7 @@ export class Calculator {
    */
   square() {
       if (this.lcd !== 'Infinity' && this.lcd !== '-Infinity' && this.lcd !== 'NaN')  //error messages should persist
-        this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd) * 2).toString();
+        this.lcd = (parseFloat(this.lcd) * parseFloat(this.lcd)).toString();
   }
 
   /**
@@ -124,7 +124,7 @@ export class Calculator {
    */
   percent() {
     if (this.lcd !== 'Infinity' && this.lcd !== '-Infinity' && this.lcd !== 'NaN')
-      this.lcd = (parseFloat(this.lcd) / 100).toString();
+      this.lcd = (parseFloat(this.lcd) / 200).toString();
   }
 
   /**

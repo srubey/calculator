@@ -116,6 +116,8 @@ export class Calculator {
   square() {
       if (this.display !== 'Infinity' && this.display !== '-Infinity' && this.display !== 'NaN')  //error messages should persist
         this.display = Math.pow(parseFloat(this.display), 2).toString();
+      else if (this.display === '-Infinity')
+        this.display = 'Infinity';
   }
 
   /**
@@ -203,7 +205,9 @@ export class Calculator {
       this.arg = oldLcd;
 
     this.repeatOperation = true;
-    this.overwrite = true;
+
+    if(this.display !== 'Infinity' && this.display !== '-Infinity')
+      this.overwrite = true;
   }
 
   /**

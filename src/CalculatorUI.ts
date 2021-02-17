@@ -36,6 +36,7 @@ export class CalculatorUI extends Calculator {
     super.square();
     this.updateDisplay();
   }
+
   percent(){
     super.percent();
     this.updateDisplay();

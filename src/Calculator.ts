@@ -124,7 +124,7 @@ export class Calculator {
    */
   percent() {
     if (this.lcd !== 'Infinity' && this.lcd !== '-Infinity' && this.lcd !== 'NaN')
-      this.lcd = (parseFloat(this.lcd) / 200).toString();
+      this.lcd = (parseFloat(this.lcd) / 100).toString();
   }
 
   /**

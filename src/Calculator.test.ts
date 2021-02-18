@@ -220,6 +220,24 @@ test('divide two numbers', () => {
     }
 });
 
+test('square a number', () => {
+  for (let i of numbers){
+    let calc = new Calculator();
+    calc.display = i.toString();
+    calc.square();
+    expect(calc.display).toBe((i * i).toString());
+  }
+});
+
+test('get percent value of a number', () => {
+  for (let i of numbers){
+    let calc = new Calculator();
+    calc.display = i.toString();
+    calc.percent();
+    expect(calc.display).toBe((i / 100).toString());
+  }
+}); 
+
 test('repeated addition three times', () => {
   for (let i of numbers)
     for (let j of numbers) {
@@ -277,6 +295,28 @@ test('repeated division three times', () => {
       else
         expect(calc.display).toBe((((i / j) / j) / j).toString());
     }
+});
+
+test('repeated squaring three times', () => {
+  for (let i of numbers){
+    let calc = new Calculator();
+    calc.display = i.toString();
+    calc.square();
+    calc.square();
+    calc.square();
+    expect(calc.display).toBe(Math.pow(Math.pow(Math.pow(i, 2), 2), 2).toString());
+  }
+});
+
+test('repeated percentage three times', () => {
+  for (let i of numbers){
+    let calc = new Calculator();
+    calc.display = i.toString();
+    calc.percent();
+    calc.percent();
+    calc.percent();
+    expect(calc.display).toBe((i / 100 / 100 / 100).toString());
+  }
 });
 
 test('add three different numbers', () => {
@@ -342,15 +382,6 @@ test('divide three different numbers', () => {
       }
 });
 
-test('square a number', () => {
-  for (let i of numbers){
-    let calc = new Calculator();
-    calc.display = i.toString();
-    calc.square();
-    expect(calc.display).toBe((i * i).toString());
-  }
-});  
-
 test('Infinity message persists in square function', () => {
   let calc = new Calculator();
   calc.display = 'Infinity';
@@ -358,11 +389,11 @@ test('Infinity message persists in square function', () => {
   expect(calc.display).toBe('Infinity');
 });
 
-test('-Infinity message persists in square function', () => {
+test('-Infinity message switches to positive Infinity in square function', () => {
   let calc = new Calculator();
   calc.display = '-Infinity';
   calc.square();
-  expect(calc.display).toBe('-Infinity');
+  expect(calc.display).toBe('Infinity');
 });
 
 test('NaN message persists in square function', () => {
@@ -371,15 +402,6 @@ test('NaN message persists in square function', () => {
   calc.square();
   expect(calc.display).toBe('NaN');
 });
-
-test('get percent value of a number', () => {
-  for (let i of numbers){
-    let calc = new Calculator();
-    calc.display = i.toString();
-    calc.percent();
-    expect(calc.display).toBe((i / 100).toString());
-  }
-});  
 
 test('Infinity message persists in percent function', () => {
   let calc = new Calculator();

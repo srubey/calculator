@@ -121,7 +121,7 @@ export class Calculator {
   square() {
       if (this.display !== 'Infinity' && this.display !== '-Infinity' && this.display !== 'NaN')  //error messages should persist
         this.display = Math.pow(parseFloat(this.display), 2).toString();
-      else if (this.display === '-Infinity')
+      else if (this.display === '-Infinity')  //but -Infinity squared should be positive
         this.display = 'Infinity';
   }
 
@@ -230,7 +230,7 @@ export class Calculator {
   }
 
   /**
-   * Verifies the user's input is a single numerical digit between 0 and 9
+   * Verify that the user's input is a single numerical digit between 0 and 9
    */
   checkIfSingleDigit(x: number) {
     let isDigit = false;

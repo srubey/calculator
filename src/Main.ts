@@ -14,9 +14,9 @@ window.onload = () => {
   document.getElementById('9').onclick = () => calcUI.digit(9);
   document.getElementById('0').onclick = () => calcUI.digit(0);
   document.getElementById('+-').onclick = () => calcUI.negate();
+  document.getElementById('.').onclick = () => calcUI.decimal();
   document.getElementById('^2').onclick = () => calcUI.square();
   document.getElementById('%').onclick = () => calcUI.percent();
-  document.getElementById('.').onclick = () => calcUI.decimal();
   document.getElementById('+').onclick = () => calcUI.op(Op.Add);
   document.getElementById('-').onclick = () => calcUI.op(Op.Subtract);
   document.getElementById('*').onclick = () => calcUI.op(Op.Multiply);

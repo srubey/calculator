@@ -1,6 +1,10 @@
 import { CalculatorUI } from "./CalculatorUI"
 import { Op } from "./Calculator"
 
+/**
+ * The HTML layout of the calculator
+ */
+
 window.onload = () => {
   let calcUI = new CalculatorUI('lcd');
   document.getElementById('1').onclick = () => calcUI.digit(1);

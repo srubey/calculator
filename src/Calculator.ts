@@ -2,24 +2,9 @@
  * The binary operations supported by the calculator.
  */
 export enum Op {
-  /**
-   * Addition.
-   */
   Add,
-
-  /**
-   * Subtraction.
-   */
   Subtract,
-
-  /**
-   * Multiplication.
-   */
   Multiply,
-
-  /**
-   * Division.
-   */
   Divide
 }
 

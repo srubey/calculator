@@ -57,6 +57,9 @@ export class CalculatorUI extends Calculator {
     this.updateDisplay();
   }
 
+  /**
+   * Updates the LCD display's contents based on the operation executed
+   */
   updateDisplay() {
     this.lcdDisplay.innerHTML = this.display;
   }
